@@ -1054,7 +1054,7 @@ namespace WialonIPS
                 {
                     if (this._result == 1)
                         this.Success = true;
-                    this.Description += " part #" + (this._index + 1);
+                    this.Description += " part #" + this._index;
                 }
             } else if (items.Length == 1)
             {
