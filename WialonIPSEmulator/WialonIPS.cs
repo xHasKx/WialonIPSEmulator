@@ -1069,7 +1069,10 @@ namespace WialonIPS
 
         public override string GetTextData()
         {
-            return "#AI#" + this._index + ";" + this._result;
+            if (this._index != -1)
+                return "#AI#" + this._index + ";" + this._result;
+            else
+                return "#AI#" + this._result;
         }
     }
 
