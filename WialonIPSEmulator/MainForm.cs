@@ -18,6 +18,7 @@ namespace WialonIPSEmulator
     public partial class MainForm : Form, IErrorReporter
     {
         private System.Threading.Timer tmrPing;
+
         private int _ping_interval = 240000; // 4 minutes
         private int _image_part_size = 50 * 1024; // 50kb
         private int _max_image_size = 9 * 1024 * 1024; // 9 Mb;
@@ -25,6 +26,8 @@ namespace WialonIPSEmulator
         private int _adcs_start_height = 0;
         private int _custom_params_start_height = 0;
         private bool _closed = false, _ready = false;
+        private string _help_link = "https://github.com/xHasKx/WialonIPSEmulator/wiki/Help";
+
         private AdcParamControl[] _adc_params;
         private CustomParamControl[] _custom_params;
 
@@ -813,6 +816,13 @@ namespace WialonIPSEmulator
                 else
                     this.tmrPing.Change(0, this._ping_interval);
             }
+        }
+
+        private void contentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var si = new System.Diagnostics.ProcessStartInfo(this._help_link);
+            si.UseShellExecute = true;
+            System.Diagnostics.Process.Start(si);
         }
     }
 

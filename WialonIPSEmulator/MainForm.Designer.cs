@@ -85,7 +85,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tbLat = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabFile = new System.Windows.Forms.TabPage();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.emulatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -222,7 +221,6 @@
             this.tabMain.Controls.Add(this.tabLog);
             this.tabMain.Controls.Add(this.tabMessages);
             this.tabMain.Controls.Add(this.tabManual);
-            this.tabMain.Controls.Add(this.tabFile);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Location = new System.Drawing.Point(0, 91);
             this.tabMain.Name = "tabMain";
@@ -740,15 +738,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Latitude:";
             // 
-            // tabFile
-            // 
-            this.tabFile.Location = new System.Drawing.Point(4, 22);
-            this.tabFile.Name = "tabFile";
-            this.tabFile.Size = new System.Drawing.Size(596, 465);
-            this.tabFile.TabIndex = 3;
-            this.tabFile.Text = "From file";
-            this.tabFile.UseVisualStyleBackColor = true;
-            // 
             // msMainMenu
             // 
             this.msMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -773,21 +762,21 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.settingsToolStripMenuItem.Text = "Se&ttings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // saveLogToolStripMenuItem
             // 
             this.saveLogToolStripMenuItem.Name = "saveLogToolStripMenuItem";
-            this.saveLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveLogToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.saveLogToolStripMenuItem.Text = "&Save log";
             this.saveLogToolStripMenuItem.Click += new System.EventHandler(this.saveLogToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -803,13 +792,14 @@
             // contentToolStripMenuItem
             // 
             this.contentToolStripMenuItem.Name = "contentToolStripMenuItem";
-            this.contentToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.contentToolStripMenuItem.Text = "&Content";
+            this.contentToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.contentToolStripMenuItem.Text = "&Wiki";
+            this.contentToolStripMenuItem.Click += new System.EventHandler(this.contentToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -915,7 +905,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog dlgSaveLog;
         private System.Windows.Forms.TabPage tabManual;
-        private System.Windows.Forms.TabPage tabFile;
         private System.Windows.Forms.TextBox tbMessages;
         private System.Windows.Forms.GroupBox gbSendMessage;
         private System.Windows.Forms.TextBox tbSendMessage;
