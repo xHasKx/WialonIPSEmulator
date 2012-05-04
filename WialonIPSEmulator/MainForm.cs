@@ -212,6 +212,11 @@ namespace WialonIPSEmulator
 
         private void btnDevicesConfig_Click(object sender, EventArgs e)
         {
+            this.ShowConfigDevicesDialog();
+        }
+
+        private void ShowConfigDevicesDialog()
+        {
             var cform = new DevicesConfigForm(this, this._devices.ToArray());
             if (cform.ShowConfig() == DialogResult.OK)
             {
@@ -297,8 +302,8 @@ namespace WialonIPSEmulator
             }
             catch (DeviceNotSelected)
             {
-                MessageBox.Show("Please create device first");
-                this.btnDevicesConfig.Focus();
+                MessageBox.Show("Please create device first", "Cannot connect");
+                this.ShowConfigDevicesDialog();
             }
             catch (Exception exc)
             {
@@ -801,10 +806,13 @@ namespace WialonIPSEmulator
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new SettingsForm(this.Settings).ShowDialog();
-            if (!this.Settings.SendPingPackets)
-                this.tmrPing.Change(Timeout.Infinite, Timeout.Infinite);
-            else
-                this.tmrPing.Change(0, this._ping_interval);
+            if (this._mc != null && this._mc.IsConnected)
+            {
+                if (!this.Settings.SendPingPackets)
+                    this.tmrPing.Change(Timeout.Infinite, Timeout.Infinite);
+                else
+                    this.tmrPing.Change(0, this._ping_interval);
+            }
         }
     }
 
