@@ -335,6 +335,8 @@ namespace WialonIPSEmulator
             this.Log.PostHead(">>>", msg.ToString());
             if (msg.MsgType == MessageType.Message)
                 this.Messages.Received((msg as WialonIPS.MessageMessage).Text);
+            if (msg.MsgType == MessageType.LoginAns && !(msg as LoginAnsMessage).Success)
+                Disconnect();
         }
 
         void _mc_OnDisconnect(MessagesCommunicator comm)
@@ -354,6 +356,11 @@ namespace WialonIPSEmulator
         }
 
         private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            Disconnect();
+        }
+
+        void Disconnect()
         {
             try
             {
