@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.gbConnection = new System.Windows.Forms.GroupBox();
             this.btnDevicesConfig = new System.Windows.Forms.Button();
             this.cbDevice = new System.Windows.Forms.ComboBox();
@@ -56,7 +57,9 @@
             this.btnEditCustomParams = new System.Windows.Forms.Button();
             this.btnADCsCount = new System.Windows.Forms.Button();
             this.labOutputs = new System.Windows.Forms.Label();
+            this.ioOutputs = new WialonIPSEmulator.IOPanel();
             this.labInputs = new System.Windows.Forms.Label();
+            this.ioInputs = new WialonIPSEmulator.IOPanel();
             this.tbIButton = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbHdop = new System.Windows.Forms.TextBox();
@@ -96,8 +99,6 @@
             this.dlgSaveLog = new System.Windows.Forms.SaveFileDialog();
             this.tmrAutoSend = new System.Windows.Forms.Timer(this.components);
             this.dlgOpenImage = new System.Windows.Forms.OpenFileDialog();
-            this.ioOutputs = new WialonIPSEmulator.IOPanel();
-            this.ioInputs = new WialonIPSEmulator.IOPanel();
             this.gbConnection.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabLog.SuspendLayout();
@@ -424,6 +425,17 @@
             this.labOutputs.TabIndex = 25;
             this.labOutputs.Text = "Outputs:";
             // 
+            // ioOutputs
+            // 
+            this.ioOutputs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ioOutputs.Location = new System.Drawing.Point(8, 96);
+            this.ioOutputs.Name = "ioOutputs";
+            this.ioOutputs.Size = new System.Drawing.Size(580, 30);
+            this.ioOutputs.TabIndex = 24;
+            this.ioOutputs.Value = ((uint)(0u));
+            this.ioOutputs.OnChange += new System.EventHandler(this.UpdateCurrentPacketDataHandler);
+            // 
             // labInputs
             // 
             this.labInputs.AutoSize = true;
@@ -432,6 +444,17 @@
             this.labInputs.Size = new System.Drawing.Size(39, 13);
             this.labInputs.TabIndex = 23;
             this.labInputs.Text = "Inputs:";
+            // 
+            // ioInputs
+            // 
+            this.ioInputs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ioInputs.Location = new System.Drawing.Point(8, 47);
+            this.ioInputs.Name = "ioInputs";
+            this.ioInputs.Size = new System.Drawing.Size(580, 30);
+            this.ioInputs.TabIndex = 22;
+            this.ioInputs.Value = ((uint)(0u));
+            this.ioInputs.OnChange += new System.EventHandler(this.UpdateCurrentPacketDataHandler);
             // 
             // tbIButton
             // 
@@ -817,28 +840,6 @@
             // 
             this.dlgOpenImage.Filter = "JPG|*.jpg|PNG|*.png";
             // 
-            // ioOutputs
-            // 
-            this.ioOutputs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ioOutputs.Location = new System.Drawing.Point(8, 96);
-            this.ioOutputs.Name = "ioOutputs";
-            this.ioOutputs.Size = new System.Drawing.Size(580, 30);
-            this.ioOutputs.TabIndex = 24;
-            this.ioOutputs.Value = ((uint)(0u));
-            this.ioOutputs.OnChange += new System.EventHandler(this.UpdateCurrentPacketDataHandler);
-            // 
-            // ioInputs
-            // 
-            this.ioInputs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ioInputs.Location = new System.Drawing.Point(8, 47);
-            this.ioInputs.Name = "ioInputs";
-            this.ioInputs.Size = new System.Drawing.Size(580, 30);
-            this.ioInputs.TabIndex = 22;
-            this.ioInputs.Value = ((uint)(0u));
-            this.ioInputs.OnChange += new System.EventHandler(this.UpdateCurrentPacketDataHandler);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -847,6 +848,7 @@
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.gbConnection);
             this.Controls.Add(this.msMainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMainMenu;
             this.MinimumSize = new System.Drawing.Size(620, 620);
             this.Name = "MainForm";
