@@ -18,7 +18,7 @@
     <ManifestCertificateThumbprint>873D5DB3713F6C7CEACC0C8DBE8BE3DA1AE7A73E</ManifestCertificateThumbprint>
     <ManifestKeyFile>WialonIPSEmulator_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <NoWin32Manifest>true</NoWin32Manifest>
     <ApplicationIcon>WialonIPSEmulator.ico</ApplicationIcon>
     <PublishUrl>publish\</PublishUrl>
