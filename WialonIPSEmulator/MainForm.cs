@@ -563,7 +563,7 @@ namespace WialonIPSEmulator
                         if (this._adc_params[i] != null)
                         {
                             double val = 0;
-                            if (double.TryParse(this._adc_params[i].Text.Text.Replace('.', ','), out val))
+                            if (double.TryParse(this._adc_params[i].Text.Text, out val))
                                 dev.Adcs[i] = val;
                         } else
                             dev.Adcs[i] = 0;
@@ -573,10 +573,13 @@ namespace WialonIPSEmulator
                 if (dev.CustomParameters != null) {
                     for (var i = 0; i < dev.CustomParameters.Length; i++)
                     {
+                    	var text = this._custom_params[i].Value.Text;
+                    	if (((CustomParamType)this._custom_params[i].Type.SelectedItem) == CustomParamType.Double)
+                    		text = text.Replace(',', '.');
                         dev.CustomParameters[i] = new CustomParameter(
                             this._custom_params[i].Name.Text,
                             (CustomParamType)this._custom_params[i].Type.SelectedItem,
-                            this._custom_params[i].Value.Text);
+                            text);
                         if (dev.CustomParameters[i].Name == "SOS" && dev.CustomParameters[i].Type == CustomParamType.Int)
                         {
                             dev.Alarm = (dev.CustomParameters[i].Value == "1");
