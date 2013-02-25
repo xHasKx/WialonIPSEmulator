@@ -523,12 +523,12 @@ namespace WialonIPSEmulator
             int ivalue = 0;
             UInt16 uivalue = 0;
             byte bvalue = 0;
-            if (double.TryParse(this.tbLat.Text.Replace('.', ','), out dvalue)) lat = dvalue;
-            if (double.TryParse(this.tbLon.Text.Replace('.', ','), out dvalue)) lon = dvalue;
-            if (int.TryParse(this.tbAlt.Text.Replace('.', ','), out ivalue)) alt = ivalue;
-            if (UInt16.TryParse(this.tbSpeed.Text.Replace('.', ','), out uivalue)) speed = uivalue;
-            if (UInt16.TryParse(this.tbHeading.Text.Replace('.', ','), out uivalue)) heading = uivalue;
-            if (byte.TryParse(this.tbSats.Text.Replace('.', ','), out bvalue)) sats = bvalue;
+            if (double.TryParse(this.tbLat.Text, out dvalue)) lat = dvalue;
+            if (double.TryParse(this.tbLon.Text, out dvalue)) lon = dvalue;
+            if (int.TryParse(this.tbAlt.Text, out ivalue)) alt = ivalue;
+            if (UInt16.TryParse(this.tbSpeed.Text, out uivalue)) speed = uivalue;
+            if (UInt16.TryParse(this.tbHeading.Text, out uivalue)) heading = uivalue;
+            if (byte.TryParse(this.tbSats.Text, out bvalue)) sats = bvalue;
 
             var dev = (this.cbDevice.SelectedItem as DeviceInfo);
             dev.Latitude = lat;
