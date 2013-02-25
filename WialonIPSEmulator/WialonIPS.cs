@@ -562,9 +562,7 @@ namespace WialonIPS
                 if (double.TryParse(items[0].Replace('.', ','), out lat) &&
                     double.TryParse(items[1].Replace('.', ','), out lon))
                 {
-                    var link = String.Format("http://maps.google.com/maps?q={0},{1}", items[0], items[1]);
                     this.Description += String.Format(". Coordinates: {0}, {1}", items[2], items[3]);
-
                 }
             }
         }

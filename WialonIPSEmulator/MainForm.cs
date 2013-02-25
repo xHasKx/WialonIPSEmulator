@@ -9,7 +9,6 @@ using System.Xml.Serialization;
 using WialonIPS;
 using System.IO;
 using System.Threading;
-using Microsoft.VisualBasic;
 
 namespace WialonIPSEmulator
 {
@@ -33,7 +32,7 @@ namespace WialonIPSEmulator
 
         private WialonIPS.Message send_data_message = null;
 
-        private string _settings_file_name, _last_log_file_name;
+        private string _settings_file_name, _log_file_name;
 
         private CMessages Messages;
 
@@ -56,8 +55,13 @@ namespace WialonIPSEmulator
             this.AddToMessages = new AddToTextBoxDelegate(this.AddToMessagesMethod);
             this.Log = new CLog(this.tbLog, this.AddToLog);
             this.Messages = new CMessages(this.tbMessages, this.AddToMessages);
-            this._settings_file_name = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "settings.xml");
-            this._last_log_file_name = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "last_log.txt");
+            var base_path = Environment.GetEnvironmentVariable("USERPROFILE");
+            if (base_path == null)
+                base_path = Environment.GetEnvironmentVariable("HOME");
+            if (base_path == null)
+                base_path = Path.GetDirectoryName(Application.ExecutablePath);
+            this._settings_file_name = Path.Combine(base_path, ".wialon_ips_emulator.settings");
+            this._log_file_name = Path.Combine(base_path, ".wialon_ips_emulator.log");
             this.tmrPing = new System.Threading.Timer(new TimerCallback(this.PingTimerCallback), null, System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
         }
 
@@ -211,7 +215,7 @@ namespace WialonIPSEmulator
                 // Save all settings and log
                 this.Settings.Save(this._settings_file_name);
                 this.Log.PostHead("Emulator", "Settings saved");
-                File.WriteAllText(this._last_log_file_name, this.tbLog.Text);
+                File.AppendAllText(this._log_file_name, this.tbLog.Text);
             }
             catch (Exception)
             {
@@ -693,14 +697,59 @@ namespace WialonIPSEmulator
                 this.Messages.Sent("Cannot sent image: " + reason);
         }
         #endregion
-
+        
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+            
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+            
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+            
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+            
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+            
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
+        }
+        
         private void btnADCsCount_Click(object sender, EventArgs e)
         {
             var dev = this.cbDevice.SelectedItem as DeviceInfo;
-            var cnt = "0";
+            var result = "0";
             if (dev.Adcs != null)
-                cnt = dev.Adcs.Length.ToString();
-            var result = Interaction.InputBox("Please enter ADC parameters count:", "Count of ADC parameters", cnt, this.Left, this.Top);
+                result = dev.Adcs.Length.ToString();
+            
+            if (InputBox("Count of ADC parameters", "Please enter ADC parameters count:", ref result) != DialogResult.OK)
+                return;
+            
             byte count = 0;
             if (result != null && result != "")
             {
@@ -755,10 +804,13 @@ namespace WialonIPSEmulator
         private void btnEditCustomParams_Click(object sender, EventArgs e)
         {
             var dev = this.cbDevice.SelectedItem as DeviceInfo;
-            var cp_len = "0";
+            var result = "0";
             if (dev.CustomParameters != null)
-                cp_len = dev.CustomParameters.Length.ToString();
-            var result = Interaction.InputBox("Please enter custom parameters count:", "Count of custom parameters", cp_len, this.Left, this.Top);
+                result = dev.CustomParameters.Length.ToString();
+            
+            if (InputBox("Count of custom parameters", "Please enter custom parameters count:", ref result) != DialogResult.OK)
+                return;
+            
             byte count = 0;
             if (result != null && result != "")
             {

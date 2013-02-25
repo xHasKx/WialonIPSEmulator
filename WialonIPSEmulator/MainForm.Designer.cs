@@ -578,11 +578,11 @@
         	// 
         	this.cbAutoSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         	this.cbAutoSend.AutoSize = true;
-        	this.cbAutoSend.Location = new System.Drawing.Point(254, 75);
+        	this.cbAutoSend.Location = new System.Drawing.Point(235, 75);
         	this.cbAutoSend.Name = "cbAutoSend";
-        	this.cbAutoSend.Size = new System.Drawing.Size(103, 17);
+        	this.cbAutoSend.Size = new System.Drawing.Size(106, 17);
         	this.cbAutoSend.TabIndex = 2;
-        	this.cbAutoSend.Text = "Auto send every";
+        	this.cbAutoSend.Text = "Auto send every:";
         	this.cbAutoSend.UseVisualStyleBackColor = true;
         	this.cbAutoSend.CheckedChanged += new System.EventHandler(this.cbAutoSend_CheckedChanged);
         	// 
