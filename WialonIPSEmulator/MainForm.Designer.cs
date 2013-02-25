@@ -54,6 +54,7 @@
         	this.btnSendMessage = new System.Windows.Forms.Button();
         	this.tabManual = new System.Windows.Forms.TabPage();
         	this.panParams = new System.Windows.Forms.Panel();
+        	this.cbiButtonEnabled = new System.Windows.Forms.CheckBox();
         	this.btnEditCustomParams = new System.Windows.Forms.Button();
         	this.btnADCsCount = new System.Windows.Forms.Button();
         	this.labOutputs = new System.Windows.Forms.Label();
@@ -61,7 +62,6 @@
         	this.labInputs = new System.Windows.Forms.Label();
         	this.ioInputs = new WialonIPSEmulator.IOPanel();
         	this.tbIButton = new System.Windows.Forms.TextBox();
-        	this.label11 = new System.Windows.Forms.Label();
         	this.tbHdop = new System.Windows.Forms.TextBox();
         	this.label12 = new System.Windows.Forms.Label();
         	this.cbAlarm = new System.Windows.Forms.CheckBox();
@@ -379,6 +379,7 @@
         	// panParams
         	// 
         	this.panParams.AutoScroll = true;
+        	this.panParams.Controls.Add(this.cbiButtonEnabled);
         	this.panParams.Controls.Add(this.btnEditCustomParams);
         	this.panParams.Controls.Add(this.btnADCsCount);
         	this.panParams.Controls.Add(this.labOutputs);
@@ -386,7 +387,6 @@
         	this.panParams.Controls.Add(this.labInputs);
         	this.panParams.Controls.Add(this.ioInputs);
         	this.panParams.Controls.Add(this.tbIButton);
-        	this.panParams.Controls.Add(this.label11);
         	this.panParams.Controls.Add(this.tbHdop);
         	this.panParams.Controls.Add(this.label12);
         	this.panParams.Controls.Add(this.cbAlarm);
@@ -395,6 +395,16 @@
         	this.panParams.Name = "panParams";
         	this.panParams.Size = new System.Drawing.Size(596, 293);
         	this.panParams.TabIndex = 2;
+        	// 
+        	// cbiButtonEnabled
+        	// 
+        	this.cbiButtonEnabled.Location = new System.Drawing.Point(177, 4);
+        	this.cbiButtonEnabled.Name = "cbiButtonEnabled";
+        	this.cbiButtonEnabled.Size = new System.Drawing.Size(62, 24);
+        	this.cbiButtonEnabled.TabIndex = 28;
+        	this.cbiButtonEnabled.Text = "iButton:";
+        	this.cbiButtonEnabled.UseVisualStyleBackColor = true;
+        	this.cbiButtonEnabled.CheckedChanged += new System.EventHandler(this.CbiButtonEnabledCheckedChanged);
         	// 
         	// btnEditCustomParams
         	// 
@@ -458,20 +468,12 @@
         	// 
         	// tbIButton
         	// 
-        	this.tbIButton.Location = new System.Drawing.Point(226, 6);
+        	this.tbIButton.Enabled = false;
+        	this.tbIButton.Location = new System.Drawing.Point(245, 6);
         	this.tbIButton.Name = "tbIButton";
         	this.tbIButton.Size = new System.Drawing.Size(119, 20);
         	this.tbIButton.TabIndex = 21;
         	this.tbIButton.TextChanged += new System.EventHandler(this.UpdateCurrentPacketDataHandler);
-        	// 
-        	// label11
-        	// 
-        	this.label11.AutoSize = true;
-        	this.label11.Location = new System.Drawing.Point(177, 9);
-        	this.label11.Name = "label11";
-        	this.label11.Size = new System.Drawing.Size(43, 13);
-        	this.label11.TabIndex = 20;
-        	this.label11.Text = "iButton:";
         	// 
         	// tbHdop
         	// 
@@ -493,7 +495,7 @@
         	// cbAlarm
         	// 
         	this.cbAlarm.AutoSize = true;
-        	this.cbAlarm.Location = new System.Drawing.Point(351, 8);
+        	this.cbAlarm.Location = new System.Drawing.Point(370, 8);
         	this.cbAlarm.Name = "cbAlarm";
         	this.cbAlarm.Size = new System.Drawing.Size(52, 17);
         	this.cbAlarm.TabIndex = 17;
@@ -881,6 +883,7 @@
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.CheckBox cbiButtonEnabled;
 
         #endregion
 
@@ -946,7 +949,6 @@
         private System.Windows.Forms.Label labInputs;
         private IOPanel ioInputs;
         private System.Windows.Forms.TextBox tbIButton;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbHdop;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox cbAlarm;

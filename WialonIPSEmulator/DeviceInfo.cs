@@ -41,6 +41,7 @@ namespace WialonIPSEmulator
             this.Password = "";
             this.Name = "";
             this.Adcs = new double[0];
+            this.IButton = "NA";
         }
 
         public override string ToString()

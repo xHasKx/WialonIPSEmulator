@@ -152,7 +152,13 @@ namespace WialonIPSEmulator
                 if (dev.Outputs.HasValue) this.ioOutputs.Value = dev.Outputs.Value;
                 if (dev.HDOP.HasValue) this.tbHdop.Text = dev.HDOP.Value.ToString();
                 if (dev.IButton != "NA")
+                {
                     this.tbIButton.Text = dev.IButton;
+                    this.cbiButtonEnabled.Checked = true;
+                } else
+                {
+                	this.cbiButtonEnabled.Checked = false;
+                }
                 this.cbAlarm.Checked = dev.Alarm;
             }
             this.UpdateAdcs();
@@ -542,7 +548,7 @@ namespace WialonIPSEmulator
             {
                 // full data packet
                 dev.HDOP = WialonIPS.Message.ParseDouble(this.tbHdop.Text);
-                if (this.tbIButton.Text != "")
+                if (this.cbiButtonEnabled.Checked)
                     dev.IButton = this.tbIButton.Text;
                 else
                     dev.IButton = "NA";
@@ -830,6 +836,12 @@ namespace WialonIPSEmulator
             var si = new System.Diagnostics.ProcessStartInfo(this._help_link);
             si.UseShellExecute = true;
             System.Diagnostics.Process.Start(si);
+        }
+        
+        void CbiButtonEnabledCheckedChanged(object sender, EventArgs e)
+        {
+        	this.tbIButton.Enabled = this.cbiButtonEnabled.Checked;
+        	this.UpdateDataPacketText(DateTime.Now.ToUniversalTime());
         }
     }
 
